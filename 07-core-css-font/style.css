@@ -1,0 +1,22 @@
+h1 {
+    font-size: 40px;
+}
+b {
+    font-weight: bold;
+}
+h3 {
+    font-style: italic;
+    font-size: 30px;
+}
+.a {
+    font-family: 'Dancing Script', cursive;
+}
+.b {
+    font-family: 'Pacifico', cursive;
+}
+.c {
+    font-family: 'Ranga', cursive;
+}
+.d {
+    font-family: 'Orbitron', sans-serif;
+}
