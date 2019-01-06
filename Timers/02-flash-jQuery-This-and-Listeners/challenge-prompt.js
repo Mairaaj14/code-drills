@@ -6,11 +6,11 @@
 // display the string in the display-area when clicked later.
 function createButton(str) {
   // ---------- Your Code Here ----------
-
-
-
-
-
+var newButton = $("<button>");
+newButton.addClass("btn btn-light p-2 m-2 content-button");
+newButton.text(str);
+newButton.data("content", str);
+$("#button-area").append(newButton);
 
   // ---------- End of Code area ----------
 }
@@ -26,11 +26,8 @@ function createButton(str) {
 function displayContent(event) {
   // ---------- Your Code Here ----------
 
-
-
-
-
-
+var text = $(this).data("content");
+$("#display-area").append(text);
   // ---------- End of Code area ----------
 }
 
@@ -40,11 +37,19 @@ function displayContent(event) {
 // Put your click listeners here.
 $(function () {
   // ---------- Your Code Here ----------
+$(document).on("click", ".content-button", displayContent);
 
+$(document).on("click", "#clear-button", function(event) {
+  event.preventDefault();
+  $("#display-area").empty();
+});
 
-
-
-
+$(document).on("click", "#submit-button", function(event) {
+  event.preventDefault();
+  var buttonText = $("#user-input").val();
+  $("#user-input").val("");
+  createButton(buttonText);
+});
 
   // ---------- End of Code area ----------
 })

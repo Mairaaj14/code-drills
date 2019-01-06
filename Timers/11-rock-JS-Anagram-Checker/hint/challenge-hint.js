@@ -13,7 +13,9 @@ function anagramCheck (str1, str2) {
 
   // if the two strings aren't equal in length without white space, then they can't
   // be anagrams of each other
-
+{
+  
+}
   
 
   // convert both strings to lowercase to remove case sensitivity from our logic

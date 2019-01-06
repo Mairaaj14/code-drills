@@ -7,12 +7,7 @@ function checkWibble(str) {
 
   // ---------- Your Code Here ----------
 
-
-
-
-
-
-
+  return (str.length % 2 === 0);
 
   // ----------- End Code Area -----------
 
@@ -25,13 +20,26 @@ function checkWibble(str) {
 function checkWobble(str) {
 
   // ---------- Your Code Here ----------
+  // create string vowels
 
+  var vowels = "aeiou";
 
+  // declare variable to track the number of vowels and instantiate it to 0
+  var vowelCount = 0;
+
+  // iterate through the characters in the 'str'
+  for (var i= 0; i <  str.length; i++) {
+    // if current letter is vowel, increment the variable used to trsck the number of vowels
+
+    if (vowels.includes(str[i])) {
+      vowelCount += 1;
+    }
+  }
+
+// check if the number of vowels is odd
+//return true if it is and false if it isn't
+return (vowelCount % 2 !== 0);
   
-
-
-
-
 
   // ----------- End Code Area -----------
 
@@ -48,13 +56,27 @@ function wibbleWobble(arr) {
   
   // ---------- Your Code Here ----------
 
+for (var i =0; i < arr.length; i++) {
+  // check if current elemnt passes the wibble test
+  var wibble = checkWibble(arr[i]);
 
+  // check whether current element passes the wobble test
+  var wobble = checkWobble(arr[i]);
+
+  // if element passes both test, replace it with WibbleWobble
+  if (wibble && wobble) {
+    arr[i] = "WibbleWobble";
+    // if element only passed the "Wibble" test, replace with wibble
+  } else if (wibble) {
+    arr[i] = "Wibble";
+
+    // if element only passes the "Wobble" test, replace it with wobble
+  } else if (wobble) {
+arr[i] = "Wobble";
+  }
+
+}
   
-
-
-
-
-
   // ----------- End Code Area -----------
   return arr;
 }

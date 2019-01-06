@@ -86,11 +86,26 @@
         event.preventDefault()
 
       // ===================== YOUR CODE HERE ==================
+      var location = $("#location").val()
+      var category = $("#category").val()
+      
+      $.ajax({
+        url: 'https//api.yelp.com/v3/businesses/search?term='  + category + '&location' + location + '',
+        method: "GET",
+        headers: {
+          authorization: "5xQEEIFVs-ZoeTNCxLO2pQ"
 
+        }
+      }).then(function (response) {
+        console.log(response)
 
-
-
-
+        for(var i=0; i < response.businessess.length; i++) {
+          $(".container").append('<img class="thumbnail" src="' + response.businessess[i].image_url + '"/><h2 clsss="name">' + response.businessess[i].name + '</h2><p class="phone">' + response.businessess[i].display_phone + '</p><p class="address">'
+            + response.businessess[i].location.address1 + ', ' +
+            response.businessess[i].location.city + ' ' + response.businessess[i].location.zip_code +
+            '</p><hr>')
+        }
+      });
 
       // =======================================================
 

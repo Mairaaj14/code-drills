@@ -54,11 +54,18 @@
       });
 
       // ===================== YOUR CODE HERE ==================
-
-
-
-
-
+    
+    $("#form").on("submit", function (event) {
+      event.preventDefault()
+      var searchTerm = $("#imgQuery").val();
+      $.ajax({
+        url: 'https://api.unsplash.com//photos/random?client_id=b5c644e8534656fe7c29ea67f24fce9818e0299a040300ba3d330e9af6d62675b&query=' +searchTerm + '',
+        method: "GET"
+      }).then(function (response) {
+        console.log(response)
+        $(".holder").append("<img class='img' src='" + response.urls.raw + "'/>")
+      })
+    })
       //========================================================
 
     })

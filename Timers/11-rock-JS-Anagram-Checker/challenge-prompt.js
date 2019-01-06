@@ -6,12 +6,31 @@
 function anagramCheck (str1, str2) {
 
   // ---------- Your Code Here ----------
+  // remove all spaces in between letters
+str1 = str1.replace(/\s/g, '');
+str2 = str2.replace(/\s/g, '');
+
+// in order for the strings to be anagrams they must be equal in length after taking off the spaces
+
+if (str1.length !== str2.length) {
+  return false;
+}
+
+// turn all letters lowercase to remove case semsibility 
+str1 = str1.toLowerCase();
+str2 = str2.toLowerCase();
+
+// iterate through the first string 
+for (var i=0; i < str1.length; i++) {
+  str2 = str2.replace(str1[i], "");
+}
 
 
-
-
-
-
+if (str2.length === 0) {
+  return true;
+} else {
+  return false
+}
   // ----------- End Code Area -----------
 
 }

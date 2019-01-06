@@ -27,10 +27,12 @@ function returnCustomObject(arr){
   
   // ---------- Your Code Here ----------
 
-
-
-
-
+for (var i=0; i < arr.length; i++)
+if (obj[arr[i]]) {
+  obj[arr[i]] += 1;
+} else {
+  obj[arr[i]] = 1;
+}
 
   // ---------- End of Code Area ----------
 
@@ -53,9 +55,6 @@ console.log(toyInventoryObj);
 //   'Troll Doll': 1,
 //   'Slip n Slide': 1 }
 
-
-
-
 // ------------------------------------------------------------------
 console.log("==================== Question 02  ====================");
 // Evaluating Values in a Object:
@@ -67,11 +66,17 @@ function greatestFrequency(toyInventory){
   var maxToy, maxNum;
   
   // ---------- Your Code Here ----------
+maxToy = "";
+maxNum = 0;
 
 
+for (toy in toyInventory) {
 
-
-
+  if (toyInventory[toy] > maxNum){
+    maxNum = toyInventory[toy];
+    maxToy = toy;
+  }
+}
 
   // ---------- End of Code Area ----------
 
@@ -81,8 +86,6 @@ function greatestFrequency(toyInventory){
 // The console log of your application should be the following string: 
 // "The toy that occurs the greatest number of times is 'Mr. Potato Head', which occurs 3 times."
 greatestFrequency(toyInventoryObj);
-
-
 
 
 // ------------------------------------------------------------------
@@ -100,9 +103,9 @@ function toyArrToObj(arrayOfToys){
 
   // ---------- Your Code Here ----------
 
-
-
-
+	for(var i =0; i < arrayOfToys.length; i++){
+		toyArrayOfObjs.push({name: arrayOfToys[i]})
+  }
 
 
   // ---------- End of Code Area ----------
@@ -119,8 +122,6 @@ console.log(newToyArray);
 //   { name: 'Park Animals' },
 //   { name: 'Adventure Camp Rafting' },
 //   { name: 'Snax' } ]
-
-
 
 
 // ------------------------------------------------------------------
@@ -217,9 +218,19 @@ function createCustomObject(objectArr){
 
   // ---------- Your Code Here ----------
 
+for(var i=0; i < objectArr.length; i++) {
+if(customToyLineObj[objectArr[i].toyline]){
+  customToyLineObj[objectArr[i].toyline].toyLineToys.push(objectArr[i].title)
+  customToyLineObj[objectArr[i].toyline].totalToysInToyLine += objectArr[i].stock
 
-
-
+} else {
+customToyLineObj[objectArr[i].toyline] = {
+  toyline: objectArr[i].toyline,
+  toyLineToys: [objectArr[i].title],
+  totalToysInToyLine: objectArr[i].stock
+};
+}
+}
 
 
   // ---------- End of Code Area ----------
@@ -262,10 +273,20 @@ function areDups(arr){
 
   // ---------- Your Code Here ----------
 
+var existingNums = {};
 
+for (var i = 0; i < arr.length; i++) {
+  // if we've seen the current value already, there is at least one duplicate, so return true
+  if (existingNums[arr[i]]) {
+    return true
+  // otherwise, add the current value to the lookup table
+  } else {
+    existingNums[arr[i]] = true;
+  }
+}
 
-
-
+// if we've iterated through the entire array without encountering a duplicate, then there are no duplicates
+return false;
 
   // ---------- End of Code Area ----------
 
