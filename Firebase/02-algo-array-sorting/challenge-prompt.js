@@ -10,7 +10,38 @@
 //
 // -------------------- Your Code Here --------------------
 
+function swap(arr, idx1, idx2) {
+  var temp = arr[idx1];
+  arr[idx1] = arr[idx2];
+  arr[idx2] = temp;
+}
 
+// Write a sort function to sort  an array in adcendinf order uding the element swapper helper function
+
+function sortAscending(arr) {
+var swapped;
+do {
+  swapped = false;
+  for (var i = 0; i < arr.length - 1; i++) {
+    if (arr[i+1] > arr[i]) {
+      swap(arr, i, i+1);
+      swapped = true;
+    }
+  }
+} while (swapped);
+}
+
+// function to write array in descending function
+
+function sortDescending(arr) {
+  for (var i=0; i < arr.length - 1; i++) {
+    for (var j= 0; j < (arr.length -1) - i; j++) {
+      if (arr[j+1] > arr[j]) {
+        swap(arr, j, j+1);
+      }
+    }
+  }
+}
 
 
 
@@ -23,10 +54,24 @@
 function upDownSort(arr) {
   // -------------------- Your Code Here --------------------
 
+  var evenArr = [];
+  var oddArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      evenArr.push(arr[i])
+    } else {
+      oddArr.push(arr[i])
+    }
+  }
 
+  // Sort odd array in decending order
+sortDescending(oddArr);
 
+// Sort even array in acending order
+sortAscending(evenArr);
 
-
+// concatenate the odd to the back of the even array
+return evenArr.concat(oddArr)
   // --------------------- End Code Area --------------------
 }
 

@@ -12,11 +12,17 @@
   <script>
     function unique(str) {
     // ====================== YOUR WORK HERE ===================
+    var compare = str.split("");
+    var obj = {}
 
-
-
-
-
+    for(var i = 0; i < str.length; i++) {
+      if (obj[str[i]]) {
+        return false
+      } else {
+        obj[str[i]] = 1
+      }
+    }
+    return true
     // =========================================================
     }
     console.log(unique("chicken"))
