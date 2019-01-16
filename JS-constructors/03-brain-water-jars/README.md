@@ -11,7 +11,7 @@ _This is a word problem, so there will be no coding. Just write your answer in a
     2. An empty 5 cup capacity jar
     3. An empty 3 cup capacity jar
 
-* You can only pour water from one jar into another until the jar you're pouring water into is full or the jar your pouring from is empty
+* You can only pour water from one jar into another until the jar you're pouring watnto is full or the jar your pouring from is empty
 
 * You cannot pour the water from jars anywhere except into another jar
 

@@ -6,11 +6,13 @@ Starter Code :*/
 function indexOfLetter(char, str) {
   // code starts here
 
+for (i = 0; i < str.length; i++) {
+  if (str[i] === char) {
+    return i;
+  }
+}
+return -1;
 
-
-
-
-  
   // code ends here
 }
 
@@ -26,12 +28,14 @@ Starter Code :*/
 function evenElementsOnly(obj, key) {
   // code starts here
 
+  var evenArr = [];
+  for (var prop in onj[key]) {
+    if (obj[key][prop] % 2 === 0) {
+      evenArr.push(obj[key][prop]);
+    }
+  }
+  return evenArr;
   
-
-
-
-
-
     // code ends here
 }
 

@@ -17,8 +17,8 @@ var connection = mysql.createConnection({
     user: "root",
 
     // Your password
-    password: "",
-    database: "emmysDB"
+    password: "password",
+    database: "EMMYSdb"
 });
 
 connection.connect(function (err) {
@@ -28,12 +28,29 @@ connection.connect(function (err) {
 //This function will be called multiple times to show us an updated version of our list of nominees
 function review() {
 
-
     //3.  Let's grab a list of all the nominees
     //TO-DO go to this link and read the documentation: https://www.npmjs.com/package/cli-table.
     //Display all of the nominees and their respective data to the command line using CLI Table
     //Once you've done so, invoke the restart function at the end of this function
+    connection.query("SELECT * FROM nominees", function (err, res) {
 
+        var table = new Table({
+            //You can make these table heads chicken if you'd like. They are simply the headers for a table we're putting our data in
+            head: ["ID", "Nominee", "Seasons", "Genre", "Rating"],
+            // Width of columns
+            colWidths: [10, 20, 15, 15, 15]
+
+        });
+
+        // table is an array
+        for (var i=0; i < res.length; i++) {
+            table.push(
+                [res[i].nominee_id, res[i].show_name, res[i].num_seasons, res[i].genre, res[i].rating],
+            );
+        }
+        console.log(table.toString());
+        restart()
+    });
 }
 
 
@@ -59,15 +76,15 @@ function manageNominees() {
 
             //UPDATE    
             case "Change a nominee's rating":
-
-
+                populateNominees(updateRating);
+   
            // 4. Call the populate nominees function here, and pass it upddateRating as an argument. This will give us an array of options to give to the user when they want to choose who to update;
                 break;
 
             //DELETE    
             case "Delete a nominee :(":
             //Oooooh, look! ANOTHER callback
-
+                populateNominees(remove);
 
             // 5. Call the populate nominees function here, and pass it remove as an argument. This will give us an array of options to give to the user when they want to choose who to update;
                 break;
@@ -95,15 +112,13 @@ function add() {
         message: "Give it a rating out of 10.\n"
 
     }]).then(function(answers){
+        connection.query("INSERT INTO nominees SET ?", {
+            show_name: answers.nomiName,
+            num_seasons: answers.seasons,
+            genre: answers.genre,
+            rating: parseFloat(answers.rating)
+        
 
-
-        //7. complete the query string:
-        var queryString = //"????"
-        connection.query(queryString, {
-
-
-         //8.
-          //??????
         })
         //Let's have a gander at our updated table (pulling straight from our database!!!!)
         review()
@@ -119,13 +134,13 @@ function populateNominees(crud){
     options = []
 
 
-    //10. Complete the query string.
-    var queryString = //"?????"
-    connection.query(queryString, function (err, res) {
-
+    connection.query("SELECT * FROM nominees", function (err, res) {
+     //11. LOOP through the names of the nominees, and PUSH them into our options array
        
-        //11. LOOP through the names of the nominees, and PUSH them into our options array
-       
+       for (var i = 0; i < res.length; i++) {
+           options.push(res[i].show_name)
+       }
+    
         //Here is our callback. It will call either the update or delete functions depending on what we pass to it in our switch/case
         crud(options)
     })
@@ -148,15 +163,12 @@ function updateRating(list) {
         message: "Enter the new rating out of 10 (decimals up to two places are accepted)"
     }]).then(function(answers){
 
+        connection.query("UPDATE nominees SET ? WHERE?",[{
+            rating: parseFloat(answers.rating)
+        }, {
+            show_name: answers.nominee
+        }],
 
-        //12. Complete the query string
-        var queryString = //"????"
-        connection.query(queryString,[
-
-
-            //13. Update the rating of the chosen show
-          //?????????
-        ], 
         function(err, res) {
             console.log("Here is an updated list of the nominees:")
             //Let's have a look at our updated table (pulling straight from our database!!!!)
@@ -178,12 +190,9 @@ function remove(list) {
         message: "Who is getting booted from the nominees?"
     }]).then(function(answer){
 
+        connection.query("DELETE FROM nominees WHERE ?",{
+            show_name: answer.delete
 
-        //14. Complete the query string
-        var queryString = //"?????"
-        connection.query(queryString,{
-
-            
             //15. Delete the chosen nominee
             //This is the row WHERE we will execute our delete
               //?????
